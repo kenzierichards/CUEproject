@@ -87,20 +87,31 @@ for element in title:
 
 #split by event
 for string in eventResults:
-    event = re.split(r'Girls|Boys[\s\S]*?Girls|Boys', string)
+    event = re.split(r'Girls|Boys[\s\S]*?Girls|Boys', string) #event has all information
 
+
+#can I add girls and boys to event name PLEASE
 
 #get event name and just event results
 eventName = []
 eventBodyList = []
 for i in range (1, len(event)):
     #get name of event
-    eventNameList = event[i].split("\n")
-    eventName.append(eventNameList[0])
-    #get list of event
-    eventBodyList += re.findall(r'(1 [\s\S]*)', event[i])
+    eventNameList = event[i].split("\n") #event name list steps through each event
+    #print(eventNameList)
+    if "4x" not in eventNameList[0]: #removes relays
+       #then append it to event name and add to body list
+        eventName.append(eventNameList[0]) #event name has names of all events
+        #get list of event
+        eventBodyList += re.findall(r'(1 [\s\S]*)', event[i]) #event body list has all event information in list format
 
-
+#add girls label to first half of event and boys label to second half
+for i in range(0, len(eventName)):
+    if i < len(eventName)/2:
+        eventName[i] = "Girls" + eventName[i]
+    else:
+        eventName[i] = "Boys" + eventName[i]
+ 
 #create meet list
 meet = [[[]] for i in range(len(eventBodyList))]
 
@@ -111,8 +122,8 @@ for i in range (0, len(eventBodyList)):
     person = newList.splitlines()
     meet[i] = person
 
-#create athlete dictionary
-athleteDict = {}
+#create row list for csv file
+rows = []
 
 #get relevant info
 for i in range(0, len(eventBodyList)): #len(eventBodyList)
@@ -120,31 +131,52 @@ for i in range(0, len(eventBodyList)): #len(eventBodyList)
         #split by spaces then get rid of empty strings
         text = meet[i][j].split(" ")
         finalText = [x for x in text if x.strip()]
-        #get correct format (cut out relays)
-        if len(finalText) >= 7:
+        #print(finalText)
+        #get rid of extra stuff
+        try:
+            place = int(finalText[0]) #get place 
             eName = eventName[i] #get event name
-            place = finalText[0]
-            athleteName = finalText[1] + " " + finalText[2]
-            year = finalText[3]
-            #if school is two words
-            if finalText[5].startswith(("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")): 
-                school = finalText[4]
-                finalMark = finalText[6]
+            #athlete has two names
+            if finalText[3].startswith(("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")):
+                athleteName = finalText[1] + " " + finalText[2]
+                grade = int(finalText[3]) #get grade year
+                #if school is one word
+                if finalText[5].startswith(("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")): 
+                    school = finalText[4]
+                    finalMark = finalText[6]
+                #if school is two words
+                else:
+                    school = finalText[4] + " " + finalText[5] 
+                    finalMark = finalText[7]
+            #if athlete has three names
             else:
-                school = finalText[4] + " " + finalText[5] 
-                finalMark = finalText[7]
-            #if athlete already exits, add entry
-            if athleteName in athleteDict.keys():
-                athleteDict[athleteName].append([meetName, eName, place, year, school, finalMark])
-            #create new athlete entry
-            else:
-                athleteDict[athleteName] = [meetName, eName, place, year, school, finalMark]
+                athleteName = finalText[1] + " " + finalText[2] + " " + finalText[3] 
+                grade = int(finalText[4]) #get grade year
+                #if school is one word
+                if finalText[6].startswith(("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")): 
+                    school = finalText[5]
+                    finalMark = finalText[7]
+                #if school is two words
+                else:
+                    school = finalText[5] + " " + finalText[6] 
+                    finalMark = finalText[8]
 
+            #create list of current entry
+            entry = [athleteName, meetName, eName, place, grade, school, finalMark] 
+            #append entry to rows
+            rows.append(entry) 
+            
+        #pass non-needed info
+        except: 
+            pass #pass when place not given
 
-#write dictionary to csv file
-with open('athleteDict.csv', 'w') as f:
-    for key in athleteDict.keys():
-        f.write("%s,%s\n"%(key,athleteDict[key]))
-    
+#column headers for csv
+csvFields = ["Name", "Meet", "Event", "Place", "Grade", "School", "Mark"]  
+#write data to csv file
+with open('athleteDict.csv', 'w') as csvFile:
+    csvWriter = csv.writer(csvFile)
+    csvWriter.writerow(csvFields)
+    csvWriter.writerows(rows)
+
   
 main()

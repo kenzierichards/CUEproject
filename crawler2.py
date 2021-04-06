@@ -136,6 +136,9 @@ for i in range(0, len(eventBodyList)): #len(eventBodyList)
         try:
             place = int(finalText[0]) #get place 
             eName = eventName[i] #get event name
+            eNameNext = eventName[i+1] #get next event name
+            if eName == eNameNext:
+                break
             #athlete has two names
             if finalText[3].startswith(("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")):
                 athleteName = finalText[1] + " " + finalText[2]
@@ -173,7 +176,7 @@ for i in range(0, len(eventBodyList)): #len(eventBodyList)
 #column headers for csv
 csvFields = ["Name", "Meet", "Event", "Place", "Grade", "School", "Mark"]  
 #write data to csv file
-with open('athleteDict.csv', 'w') as csvFile:
+with open('athleteData.csv', 'w') as csvFile:
     csvWriter = csv.writer(csvFile)
     csvWriter.writerow(csvFields)
     csvWriter.writerows(rows)

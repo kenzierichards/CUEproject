@@ -57,6 +57,7 @@ def main():
        if url not in visited:
            stak.append(url)
            visited.append(url)
+
    
     #create new stack and visited to hold results links
     stakResult = list()
@@ -79,8 +80,9 @@ def main():
                 if url not in visitedResult:
                     stakResult.append(url)
                     visitedResult.append(url)
-    #print(stakResult) #now stak has all links to results for desired year
+    #print(stakResult) #now stak has all links to results for desired years
     
+    m_id = [50, 51, 52, 53, 54, 55, 39, 40, 41, 42, 43, 44, 28, 29, 30, 31, 32, 33, 17, 18, 19, 20, 21, 22, 6, 7, 8, 9, 10 , 11, 45, 46, 47, 48, 49, 34, 35, 36, 37, 38, 23, 24, 25, 26, 27, 12, 13, 14, 15, 16, 1, 2, 3, 4, 5]
 
     while stakResult: 
         link = stakResult.pop()
@@ -202,7 +204,21 @@ def main():
                     finalMark = finalMark.replace("*", "")
                     finalMark = finalMark.replace("J", "") 
                     finalMark = convertToInt(finalMark)
-                    
+                    '''
+                    #sort meet
+                    for m in range(0, len(meet_idVisited)):
+                        try:
+                            prevYearStr = meet_idVisited[m-1].split()
+                            prevYear = int(prevYearStr[3])
+                            currYearStr = meet_idVisited[m].split()
+                            currYear = int(currYearStr[3])
+                            if(prevYear > currYear):
+                                changeStr = meet_idVisited[m]
+                                meet_idVisited[m] = meet_idVisited[m-1]
+                                meet_idVisited[m-1] = changeStr
+                        except:
+                            pass
+                    '''
                     #populate unique id's
                     if eName in event_idVisited:
                         event_id = event_idVisited.index(eName) + 1
@@ -227,9 +243,12 @@ def main():
                     else:
                         school_idVisited.append(school)
                         school_id = school_idVisited.index(school) + 1
-                       
+                      
+                    
+                    
+                    trueMeet_id = m_id.index(meet_id)
                     #create list of current entry
-                    entry = [student_id, athleteName, meet_id, meetName, event_id, eName, place, grade, school_id, school, finalMark] 
+                    entry = [student_id, athleteName, trueMeet_id, meetName, event_id, eName, place, grade, school_id, school, finalMark] 
                     #append entry to rows
                     rows.append(entry) 
                 

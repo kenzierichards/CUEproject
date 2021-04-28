@@ -15,7 +15,7 @@ def main():
     #column headers for csv
     csvFields = ["student_id", "name", "meet_id", "meet", "event_id", "event", "place", "grade", "school_id", "school", "mark"]  
     #write data to csv file
-    with open('trackData10.csv', 'w') as csvFile:
+    with open('trackData.csv', 'w') as csvFile:
         csvWriter = csv.writer(csvFile)
         csvWriter.writerow(csvFields)
         csvFile.close()
@@ -263,7 +263,7 @@ def writeToCSV(rows, meetName):
     #column headers for csv
     #csvFields = ["Name", "Meet", "Event", "Place", "Grade", "School", "Mark"]  
     #write data to csv file
-    with open('trackData10.csv', 'a') as csvFile:
+    with open('trackData.csv', 'a') as csvFile:
         csvWriter = csv.writer(csvFile)
         #csvWriter.writerow(csvFields)
         csvWriter.writerows(rows)

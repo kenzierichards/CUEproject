@@ -204,21 +204,8 @@ def main():
                     finalMark = finalMark.replace("*", "")
                     finalMark = finalMark.replace("J", "") 
                     finalMark = convertToInt(finalMark)
-                    '''
-                    #sort meet
-                    for m in range(0, len(meet_idVisited)):
-                        try:
-                            prevYearStr = meet_idVisited[m-1].split()
-                            prevYear = int(prevYearStr[3])
-                            currYearStr = meet_idVisited[m].split()
-                            currYear = int(currYearStr[3])
-                            if(prevYear > currYear):
-                                changeStr = meet_idVisited[m]
-                                meet_idVisited[m] = meet_idVisited[m-1]
-                                meet_idVisited[m-1] = changeStr
-                        except:
-                            pass
-                    '''
+
+
                     #populate unique id's
                     if eName in event_idVisited:
                         event_id = event_idVisited.index(eName) + 1
@@ -245,8 +232,7 @@ def main():
                         school_id = school_idVisited.index(school) + 1
                       
                     
-                    
-                    trueMeet_id = m_id.index(meet_id)
+                    trueMeet_id = m_id[meet_id - 1]
                     #create list of current entry
                     entry = [student_id, athleteName, trueMeet_id, meetName, event_id, eName, place, grade, school_id, school, finalMark] 
                     #append entry to rows

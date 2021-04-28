@@ -1,0 +1,11 @@
+.row {
+    margin-left: .1vw;
+    margin-right: .1vw;
+    margin-bottom: 1vw;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}

@@ -8,9 +8,14 @@
     margin-bottom: 3vh;
   }
 
-h1, p, a {
+h1, p, a, li, ul {
     color:ghostwhite;
     text-align: center;
+    list-style-type: none;
+}
+
+li, ul {
+    padding: 2vh;
 }
 
 .input-group{

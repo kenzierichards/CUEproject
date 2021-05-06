@@ -4,6 +4,10 @@ import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { MeetsPageComponent } from './meets-page/meets-page.component';
 import { AthletesPageComponent } from './athletes-page/athletes-page.component';
+import { BubbleComponent } from './bubble/bubble.component';
+import { PerformanceOverTimeComponent } from './performance-over-time/performance-over-time.component';
+import { PerformanceOverTimeBarComponent } from './performance-over-time-bar/performance-over-time-bar.component';
+
 
 const routes: Routes = [
   {
@@ -21,6 +25,17 @@ const routes: Routes = [
   {
     path: 'meets',
     component: MeetsPageComponent
+  },
+  {
+    path: 'bubble',
+    component: BubbleComponent
+  },
+  {
+    path: 'performanceovertime',
+    component: PerformanceOverTimeComponent
+  },{
+    path: 'performanceovertimebar',
+    component: PerformanceOverTimeBarComponent
   },
   {
     path: '**',

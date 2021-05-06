@@ -9,6 +9,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterComponent } from './footer/footer.component';
 import { AthletesPageComponent } from './athletes-page/athletes-page.component';
 import { MeetsPageComponent } from './meets-page/meets-page.component';
+import { BubbleComponent } from './bubble/bubble.component';
+import { PerformanceOverTimeComponent } from './performance-over-time/performance-over-time.component';
+import { PerformanceOverTimeBarComponent } from './performance-over-time-bar/performance-over-time-bar.component';
 
 
 @NgModule({
@@ -20,7 +23,10 @@ import { MeetsPageComponent } from './meets-page/meets-page.component';
     routingComponents,
     FooterComponent,
     AthletesPageComponent,
-    MeetsPageComponent
+    MeetsPageComponent,
+    BubbleComponent,
+    PerformanceOverTimeComponent,
+    PerformanceOverTimeBarComponent
   ],
   imports: [
     BrowserModule,

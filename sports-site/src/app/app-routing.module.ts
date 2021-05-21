@@ -8,7 +8,7 @@ import { BubbleComponent } from './bubble/bubble.component';
 import { PerformanceOverTimeComponent } from './performance-over-time/performance-over-time.component';
 import { PerformanceOverTimeBarComponent } from './performance-over-time-bar/performance-over-time-bar.component';
 
-
+//list of acceptable link suffixes
 const routes: Routes = [
   {
     path: '',

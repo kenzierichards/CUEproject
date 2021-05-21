@@ -1,7 +1,7 @@
-declare var initAthleteViz: any;
+declare var initAthleteViz: any; //holds visualization
 
 import { Component, OnInit } from '@angular/core';
-import "../../assets/script/tableau-initAthleteViz.js";
+import "../../assets/script/tableau-initAthleteViz.js"; //script 
 
 @Component({
   selector: 'app-athletes-page',
@@ -16,7 +16,7 @@ export class AthletesPageComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-
+  //loads visualization from script after view initialized
     new initAthleteViz();
   
     }
